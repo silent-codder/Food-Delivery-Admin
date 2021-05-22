@@ -19,6 +19,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.cctpl.fooddeliveryadmin.Fragments.OrderProductViewFragment;
 import com.cctpl.fooddeliveryadmin.Model.OrderData;
 import com.cctpl.fooddeliveryadmin.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -28,6 +32,8 @@ import java.util.List;
 
 public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder>{
     List<OrderData> orderData;
+    FirebaseFirestore firebaseFirestore;
+    String Mobile;
 
     public OrderAdapter(List<OrderData> orderData) {
         this.orderData = orderData;
@@ -37,6 +43,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder>{
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.order_view,parent,false);
+        firebaseFirestore = FirebaseFirestore.getInstance();
         return new ViewHolder(view);
     }
 
@@ -45,10 +52,24 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder>{
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         String Status = orderData.get(position).getStatus();
         long TimeStamp = orderData.get(position).getTimeStamp();
-        long Count = orderData.get(position).getProductCount();
+        String DStatus = orderData.get(position).getService();
+        String Address = orderData.get(position).getAddress();
         long Total = orderData.get(position).getTotalPrice();
         String UserId = orderData.get(position).getUserId();
         String OrderId = orderData.get(position).OrderId;
+
+        firebaseFirestore.collection("Users").document(UserId)
+                .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()){
+                    String UserName = task.getResult().getString("UserName");
+                    Mobile = task.getResult().getString("MobileNumber");
+                    holder.mUserName.setText(UserName);
+                    holder.mAddress.setText(Address + "\nMobile No : " + Mobile);
+                }
+            }
+        });
 
         if (Status.equals("Cancel")){
             holder.mIcon.setImageResource(R.drawable.red);
@@ -62,7 +83,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder>{
         Date d = new Date(TimeStamp);
         DateFormat dateFormat1 = new SimpleDateFormat("MMM dd , yyyy");
         String Date = dateFormat1.format(d.getTime());
-        holder.mCount.setText(String.valueOf(Count) + " Products");
+        holder.mDeliveryStatus.setText(DStatus);
         holder.mTotal.setText("₹ " +String.valueOf(Total));
         holder.mDate.setText(Date);
         holder.mOrderId.setText("#"+String.valueOf(TimeStamp));
@@ -90,7 +111,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder>{
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView mTotal;
         TextView mDate;
-        TextView mCount,mStatus;
+        TextView mDeliveryStatus,mStatus,mUserName,mAddress;
         ImageView mIcon;
         RelativeLayout relativeLayout;
         TextView mOrderId;
@@ -101,9 +122,11 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder>{
             mDate = itemView.findViewById(R.id.date);
             mStatus = itemView.findViewById(R.id.status);
             mIcon = itemView.findViewById(R.id.icon);
-            mCount = itemView.findViewById(R.id.productCount);
+            mDeliveryStatus = itemView.findViewById(R.id.deliveryStatus);
+            mAddress = itemView.findViewById(R.id.Address);
             relativeLayout = itemView.findViewById(R.id.relativeLayout);
             mOrderId = itemView.findViewById(R.id.orderId);
+            mUserName = itemView.findViewById(R.id.userName);
         }
     }
 }

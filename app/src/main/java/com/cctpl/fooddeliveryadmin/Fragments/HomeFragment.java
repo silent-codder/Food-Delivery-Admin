@@ -1,10 +1,13 @@
 package com.cctpl.fooddeliveryadmin.Fragments;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -149,21 +152,21 @@ public class HomeFragment extends Fragment {
                         int count = value.size();
                         orderCount.setText("All Order list (" + String.valueOf(count) + ")");
 
-//                        if (value.isEmpty()){
-//                            LottieAnimationView lottieAnimationView = view.findViewById(R.id.empty);
-//                            TextView textView = view.findViewById(R.id.emptyTxt);
-//
-//                            lottieAnimationView.setVisibility(View.VISIBLE);
-//                            textView.setVisibility(View.VISIBLE);
-//
-//                        }else {
-//
-//                            LottieAnimationView lottieAnimationView = view.findViewById(R.id.empty);
-//                            TextView textView = view.findViewById(R.id.emptyTxt);
-//
-//                            lottieAnimationView.setVisibility(View.GONE);
-//                            textView.setVisibility(View.GONE);
-//                        }
+                        if (value.isEmpty()){
+                            LottieAnimationView lottieAnimationView = getView().findViewById(R.id.empty);
+                            TextView textView = getView().findViewById(R.id.emptyTxt);
+
+                            lottieAnimationView.setVisibility(View.VISIBLE);
+                            textView.setVisibility(View.VISIBLE);
+
+                        }else {
+
+                            LottieAnimationView lottieAnimationView = getView().findViewById(R.id.empty);
+                            TextView textView = getView().findViewById(R.id.emptyTxt);
+
+                            lottieAnimationView.setVisibility(View.GONE);
+                            textView.setVisibility(View.GONE);
+                        }
 
                         for (DocumentChange doc : value.getDocumentChanges()){
                             if (doc.getType() == DocumentChange.Type.ADDED){
@@ -192,6 +195,23 @@ public class HomeFragment extends Fragment {
                     public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
                         int count = value.size();
                          orderCount.setText(status + " Order list (" + String.valueOf(count) + ")");
+
+                        if (value.isEmpty()){
+                            LottieAnimationView lottieAnimationView = getView().findViewById(R.id.empty);
+                            TextView textView = getView().findViewById(R.id.emptyTxt);
+
+                            lottieAnimationView.setVisibility(View.VISIBLE);
+                            textView.setVisibility(View.VISIBLE);
+
+                        }else {
+
+                            LottieAnimationView lottieAnimationView = getView().findViewById(R.id.empty);
+                            TextView textView = getView().findViewById(R.id.emptyTxt);
+
+                            lottieAnimationView.setVisibility(View.GONE);
+                            textView.setVisibility(View.GONE);
+                        }
+
                         for (DocumentChange doc : value.getDocumentChanges()){
                             if (doc.getType() == DocumentChange.Type.ADDED){
                                 String OrderId = doc.getDocument().getId();
@@ -222,5 +242,31 @@ public class HomeFragment extends Fragment {
 
             }
         });
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        OnBackPressedCallback callback = new OnBackPressedCallback(true /* enabled by default */) {
+            @Override
+            public void handleOnBackPressed() {
+                new AlertDialog.Builder(getContext())
+                        .setIcon(R.drawable.mauli)
+                        .setTitle("Mauli Sweets & Namkeens Admin")
+                        .setMessage("Are you sure to exit ?")
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener()
+                        {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                getActivity().finish();
+                                getActivity().moveTaskToBack(true);
+                            }
+
+                        })
+                        .setNegativeButton("No", null)
+                        .show();
+            }
+        };
+        requireActivity().getOnBackPressedDispatcher().addCallback(this, callback);
     }
 }

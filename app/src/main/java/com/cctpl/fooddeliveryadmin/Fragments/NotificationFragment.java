@@ -50,7 +50,7 @@ public class NotificationFragment extends Fragment {
         recyclerView.setAdapter(notificationAdapter);
 
 
-        firebaseFirestore.collection("Notification").addSnapshotListener(new EventListener<QuerySnapshot>() {
+        firebaseFirestore.collection("Notification").whereNotEqualTo("NotificationSender",UserId).addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
 

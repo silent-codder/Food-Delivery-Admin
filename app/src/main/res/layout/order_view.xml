@@ -5,12 +5,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_margin="5dp"
     app:cardElevation="3dp"
-    app:cardCornerRadius="4dp"
+    android:elevation="5dp"
+    app:cardCornerRadius="5dp"
     android:layout_height="wrap_content">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="#E9F3FAF9"
         android:padding="10dp"
         android:id="@+id/relativeLayout">
 
@@ -19,6 +21,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="#4576832047"
+            android:visibility="gone"
             android:maxLength="8"
             android:fontFamily="@font/baloo_da"
             android:layout_marginBottom="2dp"
@@ -66,10 +69,12 @@
             android:layout_marginTop="10dp"
             tools:ignore="HardcodedText" />
         <TextView
+            android:id="@+id/userName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Ajinkya Shinde"
+            android:hint="loading.."
             android:layout_below="@id/view"
+            android:textColor="@color/regular"
             android:fontFamily="@font/candal"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="20dp"
@@ -82,14 +87,14 @@
             android:fontFamily="@font/candal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Total Product : "
+            android:text="Delivery Status : "
             tools:ignore="HardcodedText" />
 
         <TextView
-            android:id="@+id/productCount"
+            android:id="@+id/deliveryStatus"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="10"
+            android:textColor="@color/regular"
             android:fontFamily="@font/candal"
             android:layout_below="@id/text"
             android:layout_marginTop="5dp"
@@ -110,13 +115,34 @@
             android:id="@+id/Total"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="₹ 1220"
             android:layout_below="@id/text2"
             android:fontFamily="@font/candal"
             android:layout_marginTop="5dp"
             android:textColor="@color/primary"
             android:layout_marginEnd="20dp"
             android:layout_alignParentRight="true"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@+id/text4"
+            android:layout_below="@id/text3"
+            android:layout_marginTop="5dp"
+            android:fontFamily="@font/candal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Address : "
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@+id/Address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/text4"
+            android:fontFamily="@font/candal"
+            android:layout_alignParentRight="true"
+            android:textSize="14sp"
+            android:layout_marginTop="5dp"
+            android:textColor="@color/regular"
             tools:ignore="HardcodedText" />
 
     </RelativeLayout>

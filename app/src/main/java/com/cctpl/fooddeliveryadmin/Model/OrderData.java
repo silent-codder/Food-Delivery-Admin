@@ -3,6 +3,8 @@ package com.cctpl.fooddeliveryadmin.Model;
 public class OrderData extends OrderId {
     String UserId;
     String Status;
+    String Service;
+    String Address;
     long ProductCount;
     long TotalPrice;
     long TimeStamp;
@@ -10,9 +12,12 @@ public class OrderData extends OrderId {
     public OrderData() {
     }
 
-    public OrderData(String userId, String status, long productCount, long totalPrice, long timeStamp) {
+
+    public OrderData(String userId, String status, String service, String address, long productCount, long totalPrice, long timeStamp) {
         UserId = userId;
         Status = status;
+        Service = service;
+        Address = address;
         ProductCount = productCount;
         TotalPrice = totalPrice;
         TimeStamp = timeStamp;
@@ -32,6 +37,22 @@ public class OrderData extends OrderId {
 
     public void setStatus(String status) {
         Status = status;
+    }
+
+    public String getService() {
+        return Service;
+    }
+
+    public void setService(String service) {
+        Service = service;
+    }
+
+    public String getAddress() {
+        return Address;
+    }
+
+    public void setAddress(String address) {
+        Address = address;
     }
 
     public long getProductCount() {
