@@ -44,7 +44,7 @@ import static android.app.Activity.RESULT_OK;
 public class AddProductFragment extends Fragment {
 
 //    String[] Category = {"Select Category","ओली भेळ","तिखट भेळ","साधी भेळ","भरसणा","रेवडी","लाडू","जेलेबी","मैसूर","शेव","चिवडा","पापडी","पेढा","बर्फी","बालुशाही"};
-    String[] Category = {"Select Category" ,"Snacks","Sweets","Namkins","Drinks"};
+    String[] Category = {"Select Category" ,"Snacks","Sweets","Namkins","Drinks","Fasting"};
     String[] Unit = {"Select Unit","1 Kg", "500 gm", "250 gm", "100 gm", "50 gm","100 ml","250 ml","500 ml","1 L"};
     String CategoryName;
     String UnitName;
@@ -132,8 +132,6 @@ public class AddProductFragment extends Fragment {
 
                 if (TextUtils.isEmpty(ProductName)){
                     mProductName.setError("");
-                }else if (TextUtils.isEmpty(Description)){
-                    mDescription.setError("");
                 }else if(TextUtils.isEmpty(Price)){
                     mPrice.setError("");
                 }else if (CategoryName.equals("Select Category")){

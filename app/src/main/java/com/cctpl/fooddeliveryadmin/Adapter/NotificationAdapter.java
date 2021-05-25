@@ -55,6 +55,8 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
 
         if (Status.equals("Cancel")){
             holder.mIcon.setImageResource(R.drawable.red);
+        }else if (Status.equals("Pending")){
+            holder.mIcon.setImageResource(R.drawable.yellow);
         }
 
         Date d = new Date(TimeStamp);

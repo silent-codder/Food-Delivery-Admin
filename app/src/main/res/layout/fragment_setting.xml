@@ -1,14 +1,116 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginStart="20dp"
+    android:layout_marginEnd="20dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginBottom="52dp"
     tools:context=".Fragments.SettingFragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:textColor="@color/secondary"
+        android:text="Profile"
+        android:textSize="17sp"
+        android:fontFamily="@font/candal"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/text2"
+        tools:ignore="HardcodedText" />
 
-</FrameLayout>
+    <ProgressBar
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_below="@id/text2"
+        android:indeterminateTint="#E1F5FE"/>
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/profileImg"
+        android:layout_below="@id/text2"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        app:civ_border_width="1dp"
+        app:civ_border_color="@color/secondary"
+        android:src="@drawable/profile_img"/>
+    <TextView
+        android:id="@+id/userName"
+        android:layout_below="@+id/text2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="loading.."
+        android:textSize="18sp"
+        android:textColor="@color/secondary"
+        android:layout_marginStart="10dp"
+        android:fontFamily="@font/candal"
+        android:layout_toEndOf="@id/profileImg"
+        tools:ignore="HardcodedText" />
+    <TextView
+        android:id="@+id/mobileNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:hint="loading.."
+        android:layout_marginStart="10dp"
+        android:fontFamily="@font/candal"
+        android:layout_toEndOf="@id/profileImg"
+        android:layout_below="@id/userName"
+        tools:ignore="HardcodedText" />
+    <Button
+        android:id="@+id/btnEdit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Edit"
+        android:fontFamily="@font/candal"
+        android:textColor="@color/white"
+        android:layout_below="@id/profileImg"
+        android:layout_alignParentRight="true"
+        tools:ignore="HardcodedText" />
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/secondary"
+        android:layout_below="@id/btnEdit"
+        android:layout_marginTop="10dp"/>
+
+<!--    <TextView-->
+<!--        android:id="@+id/text"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="Order Details"-->
+<!--        android:fontFamily="@font/candal"-->
+<!--        android:layout_below="@id/view"-->
+<!--        android:layout_marginTop="5dp"-->
+<!--        tools:ignore="HardcodedText" />-->
+<!--    <com.anychart.AnyChartView-->
+<!--        android:layout_below="@id/text"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="300dp"-->
+<!--        android:id="@+id/anyChart"/>-->
+
+    <TextView
+        android:id="@+id/company"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:fontFamily="@font/candal"
+        android:textColor="@color/regular"
+        android:layout_marginTop="40dp"
+        android:layout_above="@id/logo"
+        android:layout_centerHorizontal="true"
+        android:text="Design &amp; Developed by"
+        android:textSize="10sp"
+        tools:ignore="HardcodedText" />
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="200dp"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/clearcode_logo"/>
+
+</RelativeLayout>
